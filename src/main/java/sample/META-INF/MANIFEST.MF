@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+hibernate.entity.Hiber-Class: sample.Main
+
