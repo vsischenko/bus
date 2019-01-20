@@ -13,16 +13,16 @@
         <property name="show_sql">true</property>
         <property name="format_sql">true</property>
 
-        <mapping class = "hibernate.entity.Studentt"></mapping>
+        <!--<mapping class = "hibernate.entity.Studentt"></mapping>-->
 <!--
         <mapping class = "hibernate.entity.entity.students.Exam"></mapping>
         <mapping class = "hibernate.entity.entity.students.Subject"></mapping>
 -->
 
-        <!--<mapping class = "hibernate.entity.entity.Contact"></mapping>
+        <mapping class = "hibernate.entity.entity.Contact"></mapping>
         <mapping class = "hibernate.entity.entity.Order"></mapping>
         <mapping class = "hibernate.entity.entity.History"></mapping>
-        <mapping class = "hibernate.entity.entity.Bus"></mapping>-->
+        <mapping class = "hibernate.entity.entity.HBus"></mapping>
 
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hbm2ddl.auto">update</property> -->

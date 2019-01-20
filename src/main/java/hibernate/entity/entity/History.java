@@ -17,7 +17,7 @@ public class History {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bus_id")
-    private Bus bus;
+    private HBus bus;
 
     public int getId() {
         return id;
@@ -46,11 +46,11 @@ public class History {
     }
 
 
-    public Bus getBus() {
+    public HBus getBus() {
         return bus;
     }
 
-    public void setBus(Bus bus) {
+    public void setBus(HBus bus) {
         this.bus = bus;
     }
 }

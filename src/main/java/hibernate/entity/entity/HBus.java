@@ -8,7 +8,7 @@ import java.util.Map;
 
 @Entity
 @Table(name = "bus")
-public class Bus {
+public class HBus {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ID;
@@ -29,7 +29,7 @@ public class Bus {
     @Column
     private Date addDate;
     @Column
-    private Date seenDate;
+    private Date seenDate = getAddDate();
     @Column
     @OneToMany (fetch=FetchType.LAZY, mappedBy = "bus")
     private List<History> history = new ArrayList<History>();
@@ -39,9 +39,17 @@ public class Bus {
     private boolean numTabOnFrontWindow;
     @Column
     private String park;
+    @Column
+    private String color;
 
 
+    public String getColor() {
+        return color;
+    }
 
+    public void setColor(String color) {
+        this.color = color;
+    }
 
     public int getID() {
         return ID;
@@ -136,23 +144,21 @@ public class Bus {
     }
 
 
-
-
-
     @Override
     public String toString() {
         return "Bus{" +
                 "ID=" + ID +
                 ", route=" + route +
-                ", number=" + number +
+                ", number='" + number + '\'' +
                 ", model='" + model + '\'' +
-                ", contacts=" + contacts +
+              //  ", contacts=" + contacts +
                 ", addDate=" + addDate +
                 ", seenDate=" + seenDate +
-                ", history=" + history +
+               // ", history=" + history +
                 ", inArch=" + inArch +
                 ", numTabOnFrontWindow=" + numTabOnFrontWindow +
                 ", park='" + park + '\'' +
+                ", color='" + color + '\'' +
                 '}';
     }
 }

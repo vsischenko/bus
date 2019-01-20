@@ -2,7 +2,6 @@ package hibernate.entity.entity;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Set;
 
 @Entity
 @Table(name = "contact")
@@ -21,7 +20,7 @@ public class Contact {
     @JoinTable(name = "sontactbook",
                     joinColumns = @JoinColumn(name="id_contact"),
                     inverseJoinColumns = @JoinColumn(name = "id_bus"))
-    private Bus bus;
+    private HBus bus;
 
 
 
@@ -58,11 +57,11 @@ public class Contact {
         this.number = number;
     }
 
-    public Bus getBus() {
+    public HBus getBus() {
         return bus;
     }
 
-    public void setBus(Bus bus) {
+    public void setBus(HBus bus) {
         this.bus = bus;
     }
 }

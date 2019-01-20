@@ -50,13 +50,7 @@ public class Controller implements Initializable {
 
 
     public ObservableList<Student> list = FXCollections.observableArrayList(
-
-            /*new Student(1, "Петька", "Betman", 33),
-            new Student(2, "Васька", "Бывалый", 13),
-            new Student(3, "Полька", "ЛА", 23),
-            new Student(4, "Олька", "Ка", 43)*/
-
-    );
+   );
 
 
     public static Student parsHiberStudent(Studentt studentFromDb) {
@@ -77,22 +71,18 @@ public class Controller implements Initializable {
         sname.setCellValueFactory(new PropertyValueFactory<Student, String>("sname"));
         age.setCellValueFactory(new PropertyValueFactory<Student, Integer>("age"));
 
-
         list.addAll(Hiber.readStudents_HQL());
-
-
         table.setItems(list);
     }
+
+    //Получение Даных Объекта из Строки Таблицы
 
     public void getStudent() {
         selectedStudent = table.getFocusModel().getFocusedItem();
         lname.setText("Имя : " + selectedStudent.getName());
         lsname.setText("Фамилия : " + selectedStudent.getSname());
         lage.setText("Возраст : " + selectedStudent.getAge().toString());
-
         System.out.println(table.getFocusModel().getFocusedItem().getName());
-
-
     }
 
     // По нажатию кнопки Редактировать - данные из таблицы переносятся в поля для редактирования.
@@ -125,7 +115,6 @@ public class Controller implements Initializable {
         edName.clear();
         edSname.clear();
         edAge.clear();
-
     }
 
     public void addStudent(ActionEvent actionEvent) {
