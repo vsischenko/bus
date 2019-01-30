@@ -1,5 +1,7 @@
 package hibernate.entity.entity;
 
+import org.hibernate.annotations.NaturalId;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,7 +17,8 @@ public class HBus {
 
     @Column
     private int route;
-    @Column
+    @NaturalId
+    @Column (name="number")
     private String number;
     @Column
     private String model;
@@ -23,8 +26,9 @@ public class HBus {
     @OneToMany(fetch=FetchType.LAZY, mappedBy="bus")
     private List<Contact> contacts;
 
-    //@Column
- //   private List<Wearable> wears;
+    @Column
+    @OneToMany (fetch=FetchType.EAGER, mappedBy = "bus")
+    private List<Hplanshet> planshets= new ArrayList<>();
 
     @Column
     private Date addDate;
@@ -143,6 +147,13 @@ public class HBus {
         getContacts().add(cont);
     }
 
+    public List<Hplanshet> getPlanshets() {
+        return planshets;
+    }
+
+    public void setPlanshets(List<Hplanshet> planshets) {
+        this.planshets = planshets;
+    }
 
     @Override
     public String toString() {
@@ -159,6 +170,7 @@ public class HBus {
                 ", numTabOnFrontWindow=" + numTabOnFrontWindow +
                 ", park='" + park + '\'' +
                 ", color='" + color + '\'' +
+                "планшеты есть?" + planshets.size() +
                 '}';
     }
 }

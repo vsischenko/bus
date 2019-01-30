@@ -1,10 +1,13 @@
 package sample;
 
+import hibernate.entity.entity.History;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Bus {
 
@@ -16,13 +19,13 @@ public class Bus {
 
     private final SimpleStringProperty model;
 
-   // private List<Contact> contacts;
+    // private List<Contact> contacts;
 
     private final SimpleObjectProperty<Date> addDate;
 
     private final SimpleObjectProperty<Date> seenDate;
 
-   // private List<History> history = new ArrayList<History>();
+    private List<History> history = new ArrayList<History>();
 
     private boolean inArch;
 
@@ -32,7 +35,24 @@ public class Bus {
 
     private final SimpleStringProperty busColor;
 
-    public Bus() {
+    private List<Planshet> planshetList = new ArrayList<>();
+
+    public List<Planshet> getPlanshetList() {
+        return planshetList;
+    }
+
+    public final SimpleStringProperty plNum;
+
+    public String getPlNum() {
+        return plNum.get();
+    }
+
+    public SimpleStringProperty plNumProperty() {
+        return plNum;
+    }
+
+    public Bus(SimpleStringProperty plNum) {
+        this.plNum = null;
         ID = null;
         this.route = null;
         this.number = null;
@@ -42,6 +62,7 @@ public class Bus {
         this.numTabOnFrontWindow = false;
         this.park = null;
         this.busColor = null;
+
     }
 
     public Bus(Integer id, String route, String number, String model, Date addDate, Date seenDate, boolean numTabOnFrontWindow, String park, String busColor) {
@@ -54,6 +75,7 @@ public class Bus {
         this.numTabOnFrontWindow = numTabOnFrontWindow;
         this.park = new SimpleStringProperty(park);
         this.busColor = new SimpleStringProperty(busColor);
+        this.plNum = new SimpleStringProperty("Нет");
     }
 
     public int getID() {
@@ -78,7 +100,7 @@ public class Bus {
         return addDate.get();
     }
 
-       public Date getSeenDate() {
+    public Date getSeenDate() {
         return seenDate.get();
     }
 
@@ -87,7 +109,7 @@ public class Bus {
         return inArch;
     }
 
-    public boolean isNumTabOnFrontWindow() {
+    public boolean getNumTabOnFrontWindow() {
         return numTabOnFrontWindow;
     }
 
@@ -99,6 +121,11 @@ public class Bus {
     public String getBusColor() {
         return busColor.get();
     }
+
+    public List<History> getHistory() {
+        return history;
+    }
+
 
     @Override
     public String toString() {
@@ -114,5 +141,9 @@ public class Bus {
                 ", park=" + park +
                 ", busColor=" + busColor +
                 '}';
+    }
+
+    public void setPlNum(String plNum) {
+        this.plNum.set(plNum);
     }
 }

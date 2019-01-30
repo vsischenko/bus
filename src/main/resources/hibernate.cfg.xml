@@ -23,6 +23,8 @@
         <mapping class = "hibernate.entity.entity.Order"></mapping>
         <mapping class = "hibernate.entity.entity.History"></mapping>
         <mapping class = "hibernate.entity.entity.HBus"></mapping>
+        <mapping class = "hibernate.entity.entity.PlanshetHistory"></mapping>
+        <mapping class = "hibernate.entity.entity.Hplanshet"></mapping>
 
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hbm2ddl.auto">update</property> -->

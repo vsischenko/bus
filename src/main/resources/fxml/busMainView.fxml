@@ -10,18 +10,18 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="1100.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.BusMainViewController">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="1100.0" onMouseClicked="#refreshTableView" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.BusMainViewController">
    <bottom>
-      <TextArea maxHeight="150.0" minHeight="30.0" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <TextArea fx:id="logField" maxWidth="1.7976931348623157E308" minHeight="80.0" BorderPane.alignment="CENTER" />
    </bottom>
    <left>
       <VBox prefWidth="120.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" text="База автобусов">
+            <Button fx:id="busBaseButton" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" text="База автобусов">
                <VBox.margin>
                   <Insets bottom="2.0" />
                </VBox.margin></Button>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" text="База планшетов">
+            <Button fx:id="planshBaseButton" mnemonicParsing="false" onAction="#openPlanshetBaseView" prefHeight="50.0" prefWidth="120.0" text="База планшетов">
                <VBox.margin>
                   <Insets bottom="2.0" />
                </VBox.margin></Button>
@@ -70,7 +70,7 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <TextField>
+                        <TextField fx:id="filterField">
                            <HBox.margin>
                               <Insets bottom="5.0" left="5.0" />
                            </HBox.margin>
@@ -122,11 +122,70 @@
                                     <Font size="14.0" />
                                  </font>
                               </Label>
+                              <Label fx:id="labGosnum" layoutX="158.0" prefHeight="18.0" prefWidth="98.0">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="labRouteNum" layoutX="158.0" layoutY="20.0" prefHeight="18.0" prefWidth="98.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="labBusModel" layoutX="158.0" layoutY="40.0" prefHeight="18.0" prefWidth="98.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="labBusColor" layoutX="158.0" layoutY="60.0" prefHeight="18.0" prefWidth="98.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="labRoutTab" layoutX="158.0" layoutY="80.0" prefHeight="18.0" prefWidth="98.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="labAddToBase" layoutX="158.0" layoutY="100.0" prefHeight="20.0" prefWidth="84.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="labLastSeenDate" layoutX="158.0" layoutY="120.0" prefHeight="20.0" prefWidth="85.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="labPark" layoutX="158.0" layoutY="140.0" prefHeight="18.0" prefWidth="98.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutY="160.0" text="Планшеты:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="labPl" layoutX="158.0" layoutY="160.0" prefHeight="20.0" prefWidth="202.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </AnchorPane>
                      </children>
                   </HBox>
                   <Separator prefWidth="200.0" />
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                     <children>
+                        <Button fx:id="editBusButton" mnemonicParsing="false" text="Редактировать" visible="false" />
+                        <Button fx:id="addPlanshetButton" mnemonicParsing="false" onAction="#displayAddPlWindow" text="Добавить планшет" visible="false" />
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" right="5.0" />
+                     </padding>
+                  </HBox>
                </children>
                <VBox.margin>
                   <Insets left="5.0" top="5.0" />
@@ -139,7 +198,7 @@
       <VBox alignment="TOP_CENTER" prefHeight="360.0" prefWidth="227.0" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" text="БАЗА АВТОБУСОВ" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS" />
-            <TableView fx:id="busTable" prefWidth="200.0" VBox.vgrow="ALWAYS">
+            <TableView fx:id="busTable" onMouseClicked="#showLogOfSelectedBusInTableView" prefWidth="200.0" VBox.vgrow="ALWAYS">
               <columns>
                 <TableColumn fx:id="seenDate" prefWidth="75.0" text="Видели" />
                 <TableColumn fx:id="gosNum" prefWidth="65.0" text="Госномер" />

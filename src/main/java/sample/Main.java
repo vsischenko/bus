@@ -6,16 +6,32 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class Main extends Application {
+
+    private Stage primaryStage;
+
+
+
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        this.primaryStage = primaryStage;
+
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/busMainView.fxml"));
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root));
+        Scene scena = new Scene(root);
+
+        primaryStage.setTitle("Bus database");
+        primaryStage.setScene(scena);
         primaryStage.show();
     }
 
+    public void changeScene(String fxml) throws IOException {
+        Parent pane = FXMLLoader.load(getClass().getResource(fxml));
+
+        primaryStage.getScene().setRoot(pane);
+    }
 
     public static void main(String[] args) {
         launch(args);

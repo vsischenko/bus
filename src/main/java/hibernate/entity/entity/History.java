@@ -15,7 +15,7 @@ public class History {
     private String log;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "bus_id")
     private HBus bus;
 
@@ -52,5 +52,14 @@ public class History {
 
     public void setBus(HBus bus) {
         this.bus = bus;
+    }
+
+    public History(Date addDate, String log, HBus bus) {
+        this.addDate = addDate;
+        this.log = log;
+        this.bus = bus;
+    }
+
+    public History() {
     }
 }
