@@ -23,6 +23,9 @@ public class HBus {
     @Column
     private String model;
 
+    @Embedded
+    private SpecialMarks specialMarks;
+
     @OneToMany(fetch=FetchType.LAZY, mappedBy="bus")
     private List<Contact> contacts;
 
@@ -46,6 +49,13 @@ public class HBus {
     @Column
     private String color;
 
+    public SpecialMarks getSpecialMarks() {
+        return specialMarks;
+    }
+
+    public void setSpecialMarks(SpecialMarks specialMarks) {
+        this.specialMarks = specialMarks;
+    }
 
     public String getColor() {
         return color;

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="1100.0" onMouseClicked="#refreshTableView" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.BusMainViewController">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="1100.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.BusMainViewController">
    <bottom>
       <TextArea fx:id="logField" maxWidth="1.7976931348623157E308" minHeight="80.0" BorderPane.alignment="CENTER" />
    </bottom>
@@ -179,6 +179,7 @@
                   <Separator prefWidth="200.0" />
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                      <children>
+                        <Button fx:id="buttonAddBus" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#addBusToDatabase" text="Добавить" />
                         <Button fx:id="editBusButton" mnemonicParsing="false" text="Редактировать" visible="false" />
                         <Button fx:id="addPlanshetButton" mnemonicParsing="false" onAction="#displayAddPlWindow" text="Добавить планшет" visible="false" />
                      </children>

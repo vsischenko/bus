@@ -1,17 +1,16 @@
 package hibernate.entity;
 
-import hibernate.entity.entity.HBus;
-import hibernate.entity.entity.History;
-import hibernate.entity.entity.Hplanshet;
-import hibernate.entity.entity.PlanshetHistory;
+import hibernate.entity.entity.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 import sample.Planshet;
 import sample.entityBusToBusConverter;
 import sample.entityPlanshetToFXPlanshetConverter;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -30,11 +29,75 @@ public class Hiberbus {
         }
     }
 
+    //проверка на дубликат автобуса в базе
+    public static Boolean exists(String number) {
+        Session session = getSessionFactory().openSession();
+        Query query = session.createQuery("select number from HBus where number = :number");
+        query.setParameter("number", number);
 
+        if (((org.hibernate.query.Query) query).list().isEmpty()) {
+            return false;
+
+        } else {
+            return true;
+        }
+
+    }
+
+
+//TODO Создать объект Hbus и добавить его в базу.
+
+    public static void addBusToDatabase(ArrayList<String> arrOfFields) {
+        Session session = getSessionFactory().openSession();
+        //   Transaction transaction = session.beginTransaction();
+
+
+        HBus newBus = new HBus();
+
+        newBus.setAddDate(new Date());
+        newBus.setNumber(arrOfFields.get(0));
+        newBus.setModel(arrOfFields.get(1));
+        newBus.setRoute(Integer.parseInt(arrOfFields.get(2)));
+        newBus.setColor(arrOfFields.get(3));
+
+        if (arrOfFields.get(4) == null) {
+            newBus.setNumTabOnFrontWindow(false);
+        } else {
+            if (arrOfFields.get(4).equals("На лобовом")) {
+                newBus.setNumTabOnFrontWindow(true);
+            } else {
+                newBus.setNumTabOnFrontWindow(false);
+            }
+        }
+
+        newBus.setPark(arrOfFields.get(5));
+
+        newBus.setSeenDate(new Date());
+
+        SpecialMarks sp = new SpecialMarks();
+        sp.setDate(new Date());
+        sp.setLog(arrOfFields.get(6));
+
+        History history = new History();
+
+        history.setAddDate(new Date());
+        history.setLog("Добавлен в базу");
+        history.setBus(newBus);
+
+
+        newBus.setSpecialMarks(sp);
+
+        session.save(newBus);
+        session.save(history);
+
+        session.close();
+
+
+    }
 
     //TODO Поиск по номеру автобуса
     //Достать объект Hbus по уникальному госномеру
-    public static HBus getBus (String gosnum) {
+    public static HBus getBus(String gosnum) {
         Session session = getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         HBus bus = session.byNaturalId(HBus.class)
@@ -76,7 +139,7 @@ public class Hiberbus {
 
         System.out.println("Размер листа = " + hiberBusList.size());
 
-        for (int i =0; i<hiberBusList.size(); i++){
+        for (int i = 0; i < hiberBusList.size(); i++) {
 
             if (hiberBusList.get(i).isInArch()) {
                 hiberBusList.remove(i);
@@ -145,7 +208,7 @@ public class Hiberbus {
             );
             History history = new History(
                     new Date(),
-                    "с автобуса "+planshet.getBus().getNumber()+ " демонтирован планшет Инв№ : " + planshet.getInvNumber(),
+                    "с автобуса " + planshet.getBus().getNumber() + " демонтирован планшет Инв№ : " + planshet.getInvNumber(),
                     planshet.getBus());
             session.save(planshetHistory);
             session.save(history);

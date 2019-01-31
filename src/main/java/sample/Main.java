@@ -25,6 +25,7 @@ public class Main extends Application {
         primaryStage.setTitle("Bus database");
         primaryStage.setScene(scena);
         primaryStage.show();
+        primaryStage.setOnCloseRequest(e -> System.out.println("пррррррррррррр"));
     }
 
     public void changeScene(String fxml) throws IOException {

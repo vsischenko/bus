@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -22,6 +23,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -73,9 +75,8 @@ public class BusMainViewController implements Initializable {
     @FXML
     private Button addPlanshetButton;
 
-@FXML
+    @FXML
     private BorderPane borderPane;
-
 
 
     @FXML
@@ -102,7 +103,6 @@ public class BusMainViewController implements Initializable {
     }
 
 
-
     public ObservableList<Bus> list = FXCollections.observableArrayList();
 
 
@@ -121,7 +121,7 @@ public class BusMainViewController implements Initializable {
         searchBus();
     }
 
-    public void refreshTableView () {
+    public void refreshTableView() {
         list.clear();
         list.addAll(entityBusToBusConverter.parsListOfEntityBus(Hiberbus.getAllInBusTable()));
     }
@@ -174,7 +174,6 @@ public class BusMainViewController implements Initializable {
         Bus temp = Hiberbus.getBus(id);
 
 
-
         if (temp.getHistory().size() == 0) {
             System.out.println("Лог пустой");
             logField.setText("Лог пустой");
@@ -200,11 +199,11 @@ public class BusMainViewController implements Initializable {
         } else {
             labRoutTab.setText("Внизу");
         }
-        String infoAboutPlanshets="\"№:";
-        System.out.println("Размер PlanshetList === " + temp.getPlanshetList().size() );
-        if (temp.getPlanshetList().size()>0){
-            for (int i =0; i<temp.getPlanshetList().size(); i++) {
-               infoAboutPlanshets += temp.getPlanshetList().get(i).getInvNumber() + " статус - " + temp.getPlanshetList().get(i).getState()+ " || ";
+        String infoAboutPlanshets = "\"№:";
+        System.out.println("Размер PlanshetList === " + temp.getPlanshetList().size());
+        if (temp.getPlanshetList().size() > 0) {
+            for (int i = 0; i < temp.getPlanshetList().size(); i++) {
+                infoAboutPlanshets += temp.getPlanshetList().get(i).getInvNumber() + " статус - " + temp.getPlanshetList().get(i).getState() + " || ";
             }
             System.out.println(infoAboutPlanshets);
             labPl.setText(infoAboutPlanshets);
@@ -243,6 +242,22 @@ public class BusMainViewController implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
         stage.show();
+
+        stage.setOnCloseRequest(e -> refreshTableView()); // это когда закрываем по крестику
+        stage.setOnHidden(e -> refreshTableView());    //это когда закрываем по кнопке ... потому что это "по кнопке" не считается закрытием страницы
+    }
+
+    //Вызов окна добавления автобуса в базу
+    public void addBusToDatabase(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/busAddToDatabasePopupWindow.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setTitle("Добавление автобуса");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(scene);
+        stage.show();
+        stage.setOnCloseRequest(e -> refreshTableView());
+        stage.setOnHidden(e -> refreshTableView());
     }
 
 //Строка для поиска в таблице
