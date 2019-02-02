@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import java.lang.*?>
@@ -80,7 +81,7 @@
                   <Separator prefWidth="200.0" />
                   <HBox>
                      <children>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                        <AnchorPane prefHeight="279.0" prefWidth="357.0">
                            <children>
                               <Label text="Госномер автобуса: ">
                                  <font>
@@ -162,26 +163,33 @@
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <Label layoutY="160.0" text="Планшеты:">
+                              <Label layoutX="-1.0" layoutY="186.0" text="Планшеты:">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="labPl" layoutX="158.0" layoutY="160.0" prefHeight="20.0" prefWidth="202.0">
+                              <Label fx:id="labPl" layoutX="155.0" layoutY="186.0" prefHeight="20.0" prefWidth="202.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="-1.0" layoutY="160.0" text="Заметки:">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
                            </children>
                         </AnchorPane>
+                        <ImageView fx:id="imageV" fitHeight="150.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </HBox>
                   <Separator prefWidth="200.0" />
-                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                  <HBox prefHeight="36.0" prefWidth="495.0" spacing="5.0">
                      <children>
                         <Button fx:id="buttonAddBus" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#addBusToDatabase" text="Добавить" />
                         <Button fx:id="editBusButton" mnemonicParsing="false" text="Редактировать" visible="false" />
                         <Button fx:id="addPlanshetButton" mnemonicParsing="false" onAction="#displayAddPlWindow" text="Добавить планшет" visible="false" />
+                        <Button fx:id="buttonPhotoHistory" mnemonicParsing="false" onAction="#testPhotoSetup" text="Фотоистория" />
                      </children>
                      <padding>
                         <Insets bottom="5.0" right="5.0" />

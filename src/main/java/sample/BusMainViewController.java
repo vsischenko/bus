@@ -18,6 +18,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -28,8 +30,10 @@ import javafx.stage.WindowEvent;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -98,6 +102,10 @@ public class BusMainViewController implements Initializable {
     @FXML
     Label labPl;
 
+    @FXML
+    ImageView imageV;
+
+
     public static Bus getSelectedBus() {
         return selectedBus;
     }
@@ -119,6 +127,7 @@ public class BusMainViewController implements Initializable {
         list.addAll(entityBusToBusConverter.parsListOfEntityBus(Hiberbus.getAllInBusTable()));
         busTable.setItems(list);
         searchBus();
+
     }
 
     public void refreshTableView() {
@@ -167,7 +176,7 @@ public class BusMainViewController implements Initializable {
 
     //Выводит лог в поле logField по выбранному автобусу
 
-    public void showLogOfSelectedBusInTableView() {
+    public void showLogOfSelectedBusInTableView() throws IOException, SQLException {
         selectedBus = busTable.getFocusModel().getFocusedItem();
         int id = selectedBus.getID();
         String logString = "";
@@ -193,6 +202,7 @@ public class BusMainViewController implements Initializable {
         labLastSeenDate.setText(temp.getSeenDate().toString());
         labPark.setText(temp.getPark());
         labAddToBase.setText(temp.getAddDate().toString());
+        imageV.setImage(Hiberbus.readPhotoFromDbase(id));
 
         if (temp.getNumTabOnFrontWindow()) {
             labRoutTab.setText("Наверху");
@@ -258,6 +268,15 @@ public class BusMainViewController implements Initializable {
         stage.show();
         stage.setOnCloseRequest(e -> refreshTableView());
         stage.setOnHidden(e -> refreshTableView());
+    }
+
+    public void testPhotoSetup(ActionEvent actionEvent) throws IOException, SQLException {
+
+       // Image image = new Image("file:c:///00/1/myfile.jpg");
+
+
+        //Hiberbus.addPhotoToHbus();
+
     }
 
 //Строка для поиска в таблице

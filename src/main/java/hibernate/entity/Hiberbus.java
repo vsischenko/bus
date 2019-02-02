@@ -1,6 +1,8 @@
 package hibernate.entity;
 
 import hibernate.entity.entity.*;
+import javafx.scene.image.Image;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -10,6 +12,10 @@ import sample.Planshet;
 import sample.entityBusToBusConverter;
 import sample.entityPlanshetToFXPlanshetConverter;
 
+import java.awt.*;
+import java.io.*;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,6 +33,54 @@ public class Hiberbus {
             sessionFactory = new Configuration().configure().buildSessionFactory();
             return sessionFactory;
         }
+    }
+
+    //TODO запись фотофайла в базу
+
+    public static void addPhotoToHbus() throws FileNotFoundException, SQLException {
+        System.out.println("Стартанул метод добавления фоты");
+        Session session = getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        String filePath = "C:/00/1.jpg";
+        HBus bus = session.byNaturalId(HBus.class)
+                .using("number", "0072")
+                .load();
+
+        File file = new File(filePath);
+        FileInputStream inputStream = new FileInputStream(file);
+        Blob blob = Hibernate.getLobCreator(session)
+                .createBlob(inputStream, file.length());
+        bus.setPhoto(blob);
+        session.update(bus);
+        transaction.commit();
+        blob.free();
+    }
+
+    public static Image readPhotoFromDbase(int id) throws SQLException, IOException {
+        Session session = getSessionFactory().openSession();
+        HBus bus = (HBus) session.get(HBus.class, id);
+        Blob blob = bus.getPhoto();
+        if (blob==null) {
+            System.out.println("Нет фоточки");
+          File  file = new File("C:/00/1/00003.jpg");
+            FileInputStream inputStream = new FileInputStream(file);
+          Image im = new Image(inputStream);
+            return im;
+        } else {
+            byte[] blobBytes = blob.getBytes(1, (int) blob.length());
+            Image im = new Image(blob.getBinaryStream());
+            // saveBytesToFile("c:/00/1/myfile.jpg", blobBytes);
+            blob.free();
+            session.close();
+            return im;
+        }
+
+    }
+
+    private static void saveBytesToFile(String filePath, byte[] fileBytes) throws IOException {
+        FileOutputStream outputStream = new FileOutputStream(filePath);
+        outputStream.write(fileBytes);
+        outputStream.close();
     }
 
     //проверка на дубликат автобуса в базе
@@ -47,7 +101,16 @@ public class Hiberbus {
 
 //TODO Создать объект Hbus и добавить его в базу.
 
-    public static void addBusToDatabase(ArrayList<String> arrOfFields) {
+    public static void addBusToDatabase(ArrayList<String> arrOfFields, File file) throws FileNotFoundException {
+
+        if (file == null) {
+            file = new File("C:/00/1/00003.jpg");
+        }
+        //Это пока заглушка на случай, если я не выберу фото при создании
+
+        FileInputStream inputStream = new FileInputStream(file);
+
+
         Session session = getSessionFactory().openSession();
         //   Transaction transaction = session.beginTransaction();
 
@@ -87,6 +150,10 @@ public class Hiberbus {
 
         newBus.setSpecialMarks(sp);
 
+
+        Blob blob = Hibernate.getLobCreator(session)
+                .createBlob(inputStream, file.length());
+        newBus.setPhoto(blob);
         session.save(newBus);
         session.save(history);
 
@@ -104,7 +171,7 @@ public class Hiberbus {
                 .using("number", gosnum)
                 .load();
         transaction.commit();
-
+        session.close();
         return bus;
     }
 

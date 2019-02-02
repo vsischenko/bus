@@ -10,16 +10,23 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import org.hibernate.query.Query;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityNotFoundException;
+import java.awt.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class BusAddToDatabasePopupWindowController implements Initializable {
 
@@ -56,6 +63,17 @@ public class BusAddToDatabasePopupWindowController implements Initializable {
     @FXML
     private TextArea textAreaLog;
 
+    private Desktop desktop = Desktop.getDesktop();
+
+    private File file;
+
+    public File getFile() {
+        return file;
+    }
+
+    public void setFile(File file) {
+        this.file = file;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -72,7 +90,7 @@ public class BusAddToDatabasePopupWindowController implements Initializable {
 
 
 
-    public void addBusToDatabase(ActionEvent actionEvent) {
+    public void addBusToDatabase(ActionEvent actionEvent) throws FileNotFoundException {
 
         textAreaLog.setText("!");
 
@@ -142,7 +160,7 @@ public class BusAddToDatabasePopupWindowController implements Initializable {
             textAreaLog.setText(textAreaLog.getText()+"Все срослось");
             formClear();
 
-            Hiberbus.addBusToDatabase(busParam);
+            Hiberbus.addBusToDatabase(busParam,getFile());
         }
 
     }
@@ -171,5 +189,27 @@ public class BusAddToDatabasePopupWindowController implements Initializable {
 
         stage.close();
 
+    }
+
+    public void openFileChooserDialog(ActionEvent actionEvent) {
+
+        Stage stage = (Stage) buttonClose.getScene().getWindow();
+        final FileChooser fileChooser = new FileChooser();
+        File file = fileChooser.showOpenDialog(stage);
+        if (file != null) {
+            setFile(file);
+        }
+    }
+
+    private void openFile(File file) {
+
+        try {
+            desktop.open(file);
+        } catch (IOException ex) {
+            Logger.getLogger(
+                    BusAddToDatabasePopupWindowController.class.getName()).log(
+                    Level.SEVERE, null, ex
+            );
+        }
     }
 }

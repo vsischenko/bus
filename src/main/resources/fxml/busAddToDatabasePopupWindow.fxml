@@ -40,7 +40,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="16.0" layoutY="184.0" text="Особые отметки">
+      <Label layoutX="17.0" layoutY="218.0" text="Особые отметки">
          <font>
             <Font size="14.0" />
          </font>
@@ -49,7 +49,7 @@
       <ComboBox fx:id="menuButtonModelOfBus" layoutX="204.0" layoutY="69.0" prefWidth="150.0" />
       <ComboBox fx:id="comboNumTableOnFrontWindow" layoutX="204.0" layoutY="126.0" prefWidth="150.0" />
       <ComboBox fx:id="comboPark" layoutX="204.0" layoutY="155.0" prefWidth="150.0" />
-      <TextArea fx:id="textFieldSpesialMarks" layoutX="15.0" layoutY="208.0" prefHeight="94.0" prefWidth="341.0" />
+      <TextArea fx:id="textFieldSpesialMarks" layoutX="15.0" layoutY="245.0" prefHeight="57.0" prefWidth="341.0" />
       <Button fx:id="buttonAddBusToDatabase" layoutX="14.0" layoutY="355.0" mnemonicParsing="false" onAction="#addBusToDatabase" text="Добавить">
          <font>
             <Font size="14.0" />
@@ -67,8 +67,9 @@
       </Button>
       <ComboBox fx:id="comboColorOfBus" layoutX="204.0" layoutY="98.0" prefWidth="150.0" />
       <ComboBox fx:id="comboRouteNumber" layoutX="204.0" layoutY="41.0" prefWidth="150.0" />
-      <Button disable="true" layoutX="240.0" layoutY="182.0" mnemonicParsing="false" text="Добавить контакт" />
+      <Button disable="true" layoutX="242.0" layoutY="215.0" mnemonicParsing="false" text="Добавить контакт" />
       <TextArea fx:id="textAreaLog" layoutX="15.0" layoutY="305.0" prefHeight="44.0" prefWidth="341.0" />
+      <Button fx:id="buttonAddPhoto" layoutX="206.0" layoutY="184.0" mnemonicParsing="false" onAction="#openFileChooserDialog" prefHeight="25.0" prefWidth="150.0" text="Добавить фото" />
    </children>
    <opaqueInsets>
       <Insets bottom="3.0" left="3.0" right="3.0" top="2.0" />

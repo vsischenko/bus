@@ -3,6 +3,7 @@ package hibernate.entity.entity;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -48,6 +49,17 @@ public class HBus {
     private String park;
     @Column
     private String color;
+
+
+    private Blob photo;
+
+    public Blob getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(Blob photo) {
+        this.photo = photo;
+    }
 
     public SpecialMarks getSpecialMarks() {
         return specialMarks;
