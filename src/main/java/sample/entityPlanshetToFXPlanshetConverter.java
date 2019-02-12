@@ -6,7 +6,7 @@ public class entityPlanshetToFXPlanshetConverter {
 
     public static sample.Planshet parsEntityPlanshet(Hplanshet temp) {
         Planshet planshet = new Planshet(
-                temp.getID(),
+
                 temp.getInvNumber(),
                 temp.getTypeOfPlanshet(),
                 temp.getMountDate(),

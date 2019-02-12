@@ -3,12 +3,14 @@ package sample;
 
 import hibernate.entity.entity.HBus;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
 public class entityBusToBusConverter {
 
     //Конвертирует полученный объект Hibernate в объект Bus, с которым работает Fx приложение
+    @Transactional
     public static Bus parsEntityBus (HBus temp) {
         sample.Bus bus = new sample.Bus(temp.getID(),
                 String.valueOf(temp.getRoute()),
@@ -32,6 +34,7 @@ public class entityBusToBusConverter {
     }
 
     //Конвертирует полученный List Hibernatовских Автобусов в List Автобусов для FX
+    @Transactional
     public static List<Bus> parsListOfEntityBus (List<HBus> hiberList) {
         List<sample.Bus> list = new ArrayList<Bus>();
 

@@ -13,7 +13,7 @@ import java.util.List;
 
 public class Planshet {
 
-    private final SimpleIntegerProperty ID;
+
 
     private final SimpleStringProperty invNumber;
 
@@ -36,7 +36,7 @@ public class Planshet {
                     String typeOfPlanshet,
                     String state
                     ) {
-        this.ID = new SimpleIntegerProperty(1);
+
         this.invNumber = new SimpleStringProperty(invNumber);
         this.typeOfPlanshet = new SimpleStringProperty(typeOfPlanshet);
 
@@ -49,8 +49,8 @@ public class Planshet {
 
 
     //Конструктор на тот случай, когда я вытаскиваю данные из таблицы
-    public Planshet(int ID, String invNumber,  String typeOfPlanshet, Date mountDate, Date seenDate, Date dismountDate, String busGosnum, String state) {
-        this.ID = new SimpleIntegerProperty(ID);
+    public Planshet(String invNumber,  String typeOfPlanshet, Date mountDate, Date seenDate, Date dismountDate, String busGosnum, String state) {
+
         this.invNumber = new SimpleStringProperty(invNumber);
         this.typeOfPlanshet = new SimpleStringProperty(typeOfPlanshet);
         this.mountDate = new SimpleObjectProperty<Date>(mountDate);
@@ -60,9 +60,7 @@ public class Planshet {
         this.state = new SimpleStringProperty(state);
     }
 
-    public int getID() {
-        return ID.get();
-    }
+
 
 
     public String getInvNumber() {
@@ -104,7 +102,7 @@ public class Planshet {
     @Override
     public String toString() {
         return "Planshet{" +
-                "ID=" + ID +
+
                 ", invNumber=" + invNumber +
                 ", typeOfPlanshet=" + typeOfPlanshet +
                 ", mountDate=" + mountDate +

@@ -1,7 +1,7 @@
 package sample;
 
 import com.sun.javafx.charts.Legend;
-import hibernate.entity.Hiber;
+
 import hibernate.entity.Hiberbus;
 import hibernate.entity.entity.HBus;
 import javafx.collections.FXCollections;
@@ -26,9 +26,12 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import org.hibernate.ObjectNotFoundException;
+import org.hibernate.exception.ConstraintViolationException;
 
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.transaction.Transactional;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -105,6 +108,12 @@ public class BusMainViewController implements Initializable {
     @FXML
     ImageView imageV;
 
+    @FXML
+    Button buttonPhotoHist;
+
+    @FXML
+    Button buttonAddPhotoHistory;
+
 
     public static Bus getSelectedBus() {
         return selectedBus;
@@ -123,10 +132,17 @@ public class BusMainViewController implements Initializable {
         busModel.setCellValueFactory(new PropertyValueFactory<Bus, String>("model"));
         busColor.setCellValueFactory(new PropertyValueFactory<Bus, String>("busColor"));
 
+        try {
+            Hiberbus.firstStart();
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("КАпец, нет файла. Поймано в стартовом методе");
+        }
+
 //Вызываем метод, который считывает все данные из Таблицы Bus и загружает их в TableView
         list.addAll(entityBusToBusConverter.parsListOfEntityBus(Hiberbus.getAllInBusTable()));
         busTable.setItems(list);
-        searchBus();
+        searchBus(); //активирует поиск автобуса по номеру в таблице
 
     }
 
@@ -175,11 +191,12 @@ public class BusMainViewController implements Initializable {
     }
 
     //Выводит лог в поле logField по выбранному автобусу
-
+    
     public void showLogOfSelectedBusInTableView() throws IOException, SQLException {
         selectedBus = busTable.getFocusModel().getFocusedItem();
         int id = selectedBus.getID();
         String logString = "";
+
         Bus temp = Hiberbus.getBus(id);
 
 
@@ -205,12 +222,12 @@ public class BusMainViewController implements Initializable {
         imageV.setImage(Hiberbus.readPhotoFromDbase(id));
 
         if (temp.getNumTabOnFrontWindow()) {
-            labRoutTab.setText("Наверху");
+            labRoutTab.setText("On Top");
         } else {
-            labRoutTab.setText("Внизу");
+            labRoutTab.setText("On bottom");
         }
         String infoAboutPlanshets = "\"№:";
-        System.out.println("Размер PlanshetList === " + temp.getPlanshetList().size());
+        System.out.println("SizeOF PlanshetList === " + temp.getPlanshetList().size());
         if (temp.getPlanshetList().size() > 0) {
             for (int i = 0; i < temp.getPlanshetList().size(); i++) {
                 infoAboutPlanshets += temp.getPlanshetList().get(i).getInvNumber() + " статус - " + temp.getPlanshetList().get(i).getState() + " || ";
@@ -224,6 +241,8 @@ public class BusMainViewController implements Initializable {
 
         editBusButton.visibleProperty().set(true);
         addPlanshetButton.visibleProperty().set(true);
+        buttonAddPhotoHistory.visibleProperty().set(true);
+        buttonPhotoHist.visibleProperty().set(true);
 
     }
 
@@ -272,11 +291,28 @@ public class BusMainViewController implements Initializable {
 
     public void testPhotoSetup(ActionEvent actionEvent) throws IOException, SQLException {
 
-       // Image image = new Image("file:c:///00/1/myfile.jpg");
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/addPhotosetToBus.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setTitle("Добавление фоточек");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(scene);
+        stage.show();
+        stage.setOnCloseRequest(e -> refreshTableView());
+        stage.setOnHidden(e -> refreshTableView());
 
+    }
 
-        //Hiberbus.addPhotoToHbus();
-
+    public void oepnPhotoHistoryWindow(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/photosetsView.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setTitle("Photohistory");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(scene);
+        stage.show();
+        stage.setOnCloseRequest(e -> refreshTableView());
+        stage.setOnHidden(e -> refreshTableView());
     }
 
 //Строка для поиска в таблице

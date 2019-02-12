@@ -102,7 +102,7 @@ public class BusAddToDatabasePopupWindowController implements Initializable {
             textAreaLog.setText("Не валидный номер автобуса");
         } else {
 
-            if (Hiberbus.exists(gosnum)) {
+            if (Hiberbus.exists(gosnum,"b")) {
                 textAreaLog.setText("Уже есть в базе такой госномер");
             } else {
                 busParam.add(gosnum);

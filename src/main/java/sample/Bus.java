@@ -75,7 +75,7 @@ public class Bus {
         this.numTabOnFrontWindow = numTabOnFrontWindow;
         this.park = new SimpleStringProperty(park);
         this.busColor = new SimpleStringProperty(busColor);
-        this.plNum = new SimpleStringProperty("Нет");
+        this.plNum = new SimpleStringProperty("NO");
     }
 
     public int getID() {

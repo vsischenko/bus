@@ -81,9 +81,9 @@
                   <Separator prefWidth="200.0" />
                   <HBox>
                      <children>
-                        <AnchorPane prefHeight="279.0" prefWidth="357.0">
+                        <AnchorPane maxWidth="1.7976931348623157E308" prefHeight="279.0" prefWidth="700.0">
                            <children>
-                              <Label text="Госномер автобуса: ">
+                              <Label text="Госномер:">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -103,17 +103,17 @@
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <Label layoutY="80.0" text="Табличка на лобовом:">
+                              <Label layoutY="80.0" text="Табличка:">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <Label layoutY="100.0" text="Добавлен в базу:">
+                              <Label layoutY="100.0" text="Добавлен:">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <Label layoutY="120.0" text="Последний раз видели:">
+                              <Label layoutY="120.0" text="Видели:">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -123,64 +123,66 @@
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="labGosnum" layoutX="158.0" prefHeight="18.0" prefWidth="98.0">
+                              <Label fx:id="labGosnum" layoutX="101.0" prefHeight="18.0" prefWidth="98.0">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="labRouteNum" layoutX="158.0" layoutY="20.0" prefHeight="18.0" prefWidth="98.0">
+                              <Label fx:id="labRouteNum" layoutX="101.0" layoutY="20.0" prefHeight="18.0" prefWidth="98.0">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="labBusModel" layoutX="158.0" layoutY="40.0" prefHeight="18.0" prefWidth="98.0">
+                              <Label fx:id="labBusModel" layoutX="101.0" layoutY="40.0" prefHeight="18.0" prefWidth="98.0">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="labBusColor" layoutX="158.0" layoutY="60.0" prefHeight="18.0" prefWidth="98.0">
+                              <Label fx:id="labBusColor" layoutX="101.0" layoutY="60.0" prefHeight="18.0" prefWidth="98.0">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="labRoutTab" layoutX="158.0" layoutY="80.0" prefHeight="18.0" prefWidth="98.0">
+                              <Label fx:id="labRoutTab" layoutX="101.0" layoutY="80.0" prefHeight="18.0" prefWidth="98.0">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="labAddToBase" layoutX="158.0" layoutY="100.0" prefHeight="20.0" prefWidth="84.0">
+                              <Label fx:id="labAddToBase" layoutX="101.0" layoutY="100.0" prefHeight="20.0" prefWidth="84.0">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="labLastSeenDate" layoutX="158.0" layoutY="120.0" prefHeight="20.0" prefWidth="85.0">
+                              <Label fx:id="labLastSeenDate" layoutX="101.0" layoutY="120.0" prefHeight="20.0" prefWidth="85.0">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="labPark" layoutX="158.0" layoutY="140.0" prefHeight="18.0" prefWidth="98.0">
+                              <Label fx:id="labPark" layoutX="101.0" layoutY="140.0" prefHeight="18.0" prefWidth="98.0">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="-1.0" layoutY="186.0" text="Планшеты:">
+                              <Label layoutY="167.0" text="Планшеты:">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="labPl" layoutX="155.0" layoutY="186.0" prefHeight="20.0" prefWidth="202.0">
+                              <Label fx:id="labPl" layoutX="84.0" layoutY="167.0" prefHeight="20.0" prefWidth="202.0">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="-1.0" layoutY="160.0" text="Заметки:">
+                              <Label layoutX="1.0" layoutY="196.0" text="Заметки:">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
                               </Label>
+                              <Button fx:id="buttonPhotoHist" layoutX="358.0" layoutY="206.0" mnemonicParsing="false" onAction="#oepnPhotoHistoryWindow" text="История фото" visible="false" />
+                              <ImageView fx:id="imageV" blendMode="RED" depthTest="ENABLE" fitHeight="195.0" fitWidth="175.0" layoutX="312.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="81.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="3.0" />
+                              <TextArea layoutX="88.0" layoutY="202.0" prefHeight="76.0" prefWidth="243.0" />
                            </children>
                         </AnchorPane>
-                        <ImageView fx:id="imageV" fitHeight="150.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </HBox>
                   <Separator prefWidth="200.0" />
@@ -189,7 +191,7 @@
                         <Button fx:id="buttonAddBus" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#addBusToDatabase" text="Добавить" />
                         <Button fx:id="editBusButton" mnemonicParsing="false" text="Редактировать" visible="false" />
                         <Button fx:id="addPlanshetButton" mnemonicParsing="false" onAction="#displayAddPlWindow" text="Добавить планшет" visible="false" />
-                        <Button fx:id="buttonPhotoHistory" mnemonicParsing="false" onAction="#testPhotoSetup" text="Фотоистория" />
+                        <Button fx:id="buttonAddPhotoHistory" mnemonicParsing="false" onAction="#testPhotoSetup" text="Добавить фото" visible="false" />
                      </children>
                      <padding>
                         <Insets bottom="5.0" right="5.0" />

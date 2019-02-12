@@ -9,11 +9,12 @@ public class History {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @Column
     private Date addDate = new Date();
+
     @Column
     private String log;
-
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "bus_id")
@@ -40,7 +41,6 @@ public class History {
     }
 
     public void setLog(String log) {
-
 
         this.log = log;
     }

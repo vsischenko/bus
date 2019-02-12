@@ -93,6 +93,16 @@ public class Hplanshet {
         this.dismountDate = dismountDate;
     }
 
+    public Hplanshet() {
+    }
+
+    public Hplanshet(String invNumber, String typeOfPlanshet, int numOfPosition, String state) {
+        this.invNumber = invNumber;
+        this.typeOfPlanshet = typeOfPlanshet;
+        this.numOfPosition = numOfPosition;
+        this.state = state;
+    }
+
     @Override
     public String toString() {
         return "Hplanshet{" +

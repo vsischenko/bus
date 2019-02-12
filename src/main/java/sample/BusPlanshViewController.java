@@ -71,13 +71,13 @@ public class BusPlanshViewController implements Initializable {
         mountDate.setCellValueFactory(new PropertyValueFactory<Planshet,Date>("mountDate"));
         // list.add(new Planshet("001","Алюм","ok"));
         list.add(Hiberbus.getPlanshet(1));
-        list.add(Hiberbus.getPlanshet(2));
+     //   list.add(Hiberbus.getPlanshet(2));
 
 
         planshetTable.setItems(list);
-        Hiberbus.replacePlanshet("001", "0000");
-        Hiberbus.replacePlanshet("002","0000");
-        planshetTable.setItems(list);
+       // Hiberbus.replacePlanshet("001", "0000");
+      //  Hiberbus.replacePlanshet("002","0000");
+     //   planshetTable.setItems(list);
     }
 
     //TODO Переключение View на Базу Автобусов

@@ -3,6 +3,7 @@ package hibernate.entity.entity;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.Date;
@@ -40,7 +41,13 @@ public class HBus {
     private Date seenDate = getAddDate();
     @Column
     @OneToMany (fetch=FetchType.LAZY, mappedBy = "bus")
-    private List<History> history = new ArrayList<History>();
+    private List<History> history;
+
+    @Column
+    @OneToMany (fetch=FetchType.LAZY, mappedBy = "bus")
+    private List<Hphotoset> photosets = new ArrayList<Hphotoset>();
+
+
     @Column
     private boolean inArch;
     @Column
@@ -132,7 +139,7 @@ public class HBus {
     public void setSeenDate(Date seenDate) {
         this.seenDate = seenDate;
     }
-
+    @Transactional
     public List<History> getHistory() {
         return history;
     }
@@ -175,6 +182,14 @@ public class HBus {
 
     public void setPlanshets(List<Hplanshet> planshets) {
         this.planshets = planshets;
+    }
+
+    public List<Hphotoset> getPhotosets() {
+        return photosets;
+    }
+
+    public void setPhotosets(List<Hphotoset> photosets) {
+        this.photosets = photosets;
     }
 
     @Override
