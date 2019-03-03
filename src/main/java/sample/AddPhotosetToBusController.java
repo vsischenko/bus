@@ -64,10 +64,11 @@ public class AddPhotosetToBusController implements Initializable {
 
     String busNum = BusMainViewController.getSelectedBus().getNumber();
 
-    int sizeOfFilesList=0;
+    int sizeOfFilesList = 0;
 
     public void handlerOnDragOver(DragEvent e) {
         if (e.getDragboard().hasFiles()) {
+            System.out.println(e.getDragboard().getUrl());
             e.acceptTransferModes(TransferMode.ANY);
         }
 
@@ -82,11 +83,11 @@ public class AddPhotosetToBusController implements Initializable {
 
 
         files = e.getDragboard().getFiles();
-    File back = new File("src\\main\\java\\sample\\pics\\background.png");
-    sizeOfFilesList = files.size();
-    for (int i=0; i<6;i++) {
-        files.add(back);
-    }
+        File back = new File("src\\main\\java\\sample\\pics\\background.png");
+        sizeOfFilesList = files.size();
+        for (int i = 0; i < 6; i++) {
+            files.add(back);
+        }
 
 
         imV01.setImage(new Image(new FileInputStream(files.get(0))));
@@ -111,6 +112,12 @@ public class AddPhotosetToBusController implements Initializable {
 
         labBusNumber.setText("Добавляем фотосет к автобусу №  " + busNum);
 
+        setBackgroundPics();
+
+
+    }
+
+    public void setBackgroundPics() {
         try {
             Image background = new Image(new FileInputStream("src\\main\\java\\sample\\pics\\background.png"));
             imV01.setImage(background);
@@ -124,13 +131,11 @@ public class AddPhotosetToBusController implements Initializable {
         } catch (FileNotFoundException e) {
             System.out.println("Не найден файл background");
         }
-
-
     }
 
     public void savePhotosetToDatabase(ActionEvent actionEvent) throws FileNotFoundException, InterruptedException, SQLException {
         LocalDate dateOfPhotoset = datePicker.getValue();
-        Hiberbus.createPhotoset(files,busNum,DateUtils.asDate(dateOfPhotoset),sizeOfFilesList);
-
+        Hiberbus.createPhotoset(files, busNum, DateUtils.asDate(dateOfPhotoset), sizeOfFilesList);
+        setBackgroundPics();
     }
 }

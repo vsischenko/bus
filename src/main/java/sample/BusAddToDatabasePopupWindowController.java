@@ -10,6 +10,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.TransferMode;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -19,6 +22,7 @@ import javax.persistence.Entity;
 import javax.persistence.EntityNotFoundException;
 import java.awt.*;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
@@ -67,6 +71,8 @@ public class BusAddToDatabasePopupWindowController implements Initializable {
 
     private File file;
 
+    List<File> files;
+
     public File getFile() {
         return file;
     }
@@ -79,7 +85,7 @@ public class BusAddToDatabasePopupWindowController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         menuButtonModelOfBus.getItems().setAll("Богдан 92", "Богдан 91", "Иван", "Эталон", "Рута");
-        comboRouteNumber.getItems().setAll("121", "146", "175", "185", "203");
+        comboRouteNumber.getItems().setAll("121", "146", "175", "185", "232","203");
         comboColorOfBus.getItems().setAll("Желтый", "Белый", "Синий", "Фиолетовый", "Кобинированный");
         comboNumTableOnFrontWindow.getItems().setAll("На лобовом", "Лобовое свободно");
         comboPark.getItems().setAll("Вираж");
@@ -149,13 +155,6 @@ public class BusAddToDatabasePopupWindowController implements Initializable {
             busParam.add("" + textFieldSpesialMarks.getText());
         }
 
-
-
-
-
-
-
-
         if (busParam.size() >= 6) {
             textAreaLog.setText(textAreaLog.getText()+"Все срослось");
             formClear();
@@ -164,6 +163,24 @@ public class BusAddToDatabasePopupWindowController implements Initializable {
         }
 
     }
+
+
+    public void handlerOnDragOver(DragEvent e) {
+        if (e.getDragboard().hasFiles()) {
+
+            e.acceptTransferModes(TransferMode.ANY);
+        }
+
+    }
+
+    public void handlerOnDargDrop(DragEvent e) throws IOException {
+        files = e.getDragboard().getFiles();
+        System.out.println(files.get(0).getPath());
+        setFile(files.get(0));
+        textAreaLog.setText("Фото: " + files.get(0).getPath());
+
+    }
+
 
 
     void formClear() {
@@ -198,6 +215,7 @@ public class BusAddToDatabasePopupWindowController implements Initializable {
         File file = fileChooser.showOpenDialog(stage);
         if (file != null) {
             setFile(file);
+            textAreaLog.setText("Фото: " + files.get(0).getPath());
         }
     }
 

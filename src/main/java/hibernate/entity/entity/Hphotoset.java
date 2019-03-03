@@ -23,7 +23,7 @@ public class Hphotoset {
     List<Hphoto> listofPhotos = new ArrayList<Hphoto>();
 
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bus_id")
     private HBus bus;
 

@@ -68,8 +68,8 @@
       <ComboBox fx:id="comboColorOfBus" layoutX="204.0" layoutY="98.0" prefWidth="150.0" />
       <ComboBox fx:id="comboRouteNumber" layoutX="204.0" layoutY="41.0" prefWidth="150.0" />
       <Button disable="true" layoutX="242.0" layoutY="215.0" mnemonicParsing="false" text="Добавить контакт" />
-      <TextArea fx:id="textAreaLog" layoutX="15.0" layoutY="305.0" prefHeight="44.0" prefWidth="341.0" />
-      <Button fx:id="buttonAddPhoto" layoutX="206.0" layoutY="184.0" mnemonicParsing="false" onAction="#openFileChooserDialog" prefHeight="25.0" prefWidth="150.0" text="Добавить фото" />
+      <TextArea fx:id="textAreaLog" layoutX="15.0" layoutY="305.0" prefHeight="44.0" prefWidth="341.0" wrapText="true" />
+      <Button fx:id="buttonAddPhoto" layoutX="206.0" layoutY="184.0" mnemonicParsing="false" onAction="#openFileChooserDialog" onDragDropped="#handlerOnDargDrop" onDragOver="#handlerOnDragOver" prefHeight="25.0" prefWidth="150.0" text="Добавить фото" />
    </children>
    <opaqueInsets>
       <Insets bottom="3.0" left="3.0" right="3.0" top="2.0" />

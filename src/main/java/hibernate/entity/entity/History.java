@@ -62,4 +62,13 @@ public class History {
 
     public History() {
     }
+
+    @Override
+    public String toString() {
+        return "History{" +
+                "addDate=" + addDate +
+                ", log='" + log + '\'' +
+                ", bus=" + bus +
+                '}';
+    }
 }

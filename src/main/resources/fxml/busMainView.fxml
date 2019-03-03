@@ -179,8 +179,8 @@
                                  </font>
                               </Label>
                               <Button fx:id="buttonPhotoHist" layoutX="358.0" layoutY="206.0" mnemonicParsing="false" onAction="#oepnPhotoHistoryWindow" text="История фото" visible="false" />
-                              <ImageView fx:id="imageV" blendMode="RED" depthTest="ENABLE" fitHeight="195.0" fitWidth="175.0" layoutX="312.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="81.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="3.0" />
-                              <TextArea layoutX="88.0" layoutY="202.0" prefHeight="76.0" prefWidth="243.0" />
+                              <ImageView fx:id="imageV" depthTest="ENABLE" fitHeight="195.0" fitWidth="175.0" layoutX="312.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="81.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="3.0" />
+                              <TextArea fx:id="textVNotes" layoutX="88.0" layoutY="202.0" prefHeight="76.0" prefWidth="243.0" wrapText="true" />
                            </children>
                         </AnchorPane>
                      </children>

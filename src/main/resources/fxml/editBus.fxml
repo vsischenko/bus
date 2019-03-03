@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="700.0" prefWidth="470.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.EditBus">
+   <children>
+      <Label layoutX="6.0" layoutY="14.0" text="Госномер:" AnchorPane.leftAnchor="6.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="8.0" layoutY="46.0" text="Маршрут:" AnchorPane.leftAnchor="6.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="6.0" layoutY="108.0" text="Цвет:" AnchorPane.leftAnchor="6.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="6.0" layoutY="77.0" text="Модель:" AnchorPane.leftAnchor="6.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="8.0" layoutY="140.0" text="Табличка:" AnchorPane.leftAnchor="6.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="8.0" layoutY="171.0" text="Видели:" AnchorPane.leftAnchor="6.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="5.0" layoutY="202.0" text="Парк:" AnchorPane.leftAnchor="6.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="12.0" layoutY="235.0" text="Заметки:" AnchorPane.leftAnchor="6.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField disable="true" layoutX="213.0" layoutY="14.0" />
+      <TextField disable="true" layoutX="213.0" layoutY="46.0" />
+      <TextField disable="true" layoutX="213.0" layoutY="77.0" />
+      <TextField disable="true" layoutX="213.0" layoutY="108.0" />
+      <TextField disable="true" layoutX="213.0" layoutY="140.0" />
+      <TextField disable="true" layoutX="213.0" layoutY="171.0" />
+      <TextField disable="true" layoutX="213.0" layoutY="202.0" />
+      <Button layoutX="368.0" layoutY="14.0" mnemonicParsing="false" text="edit" />
+      <Button disable="true" layoutX="411.0" layoutY="14.0" mnemonicParsing="false" text="set" />
+      <Button disable="true" layoutX="411.0" layoutY="46.0" mnemonicParsing="false" text="set" />
+      <Button layoutX="368.0" layoutY="46.0" mnemonicParsing="false" text="edit" />
+      <Button layoutX="368.0" layoutY="77.0" mnemonicParsing="false" text="edit" />
+      <Button disable="true" layoutX="411.0" layoutY="77.0" mnemonicParsing="false" text="set" />
+      <Button layoutX="368.0" layoutY="108.0" mnemonicParsing="false" text="edit" />
+      <Button disable="true" layoutX="411.0" layoutY="108.0" mnemonicParsing="false" text="set" />
+      <Button layoutX="368.0" layoutY="140.0" mnemonicParsing="false" text="edit" />
+      <Button disable="true" layoutX="411.0" layoutY="140.0" mnemonicParsing="false" text="set" />
+      <Button layoutX="368.0" layoutY="171.0" mnemonicParsing="false" text="edit" />
+      <Button disable="true" layoutX="411.0" layoutY="171.0" mnemonicParsing="false" text="set" />
+      <Button disable="true" layoutX="411.0" layoutY="202.0" mnemonicParsing="false" text="set" />
+      <Button layoutX="368.0" layoutY="202.0" mnemonicParsing="false" text="edit" />
+      <TextArea layoutX="76.0" layoutY="235.0" prefHeight="148.0" prefWidth="286.0" wrapText="true" />
+      <Button disable="true" layoutX="411.0" layoutY="235.0" mnemonicParsing="false" text="set" />
+      <Button layoutX="368.0" layoutY="235.0" mnemonicParsing="false" text="edit" />
+      <Separator layoutX="129.0" layoutY="401.0" prefWidth="200.0" />
+      <Label layoutX="13.0" layoutY="427.0" text="Планшет 1:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="13.0" layoutY="466.0" text="Планшет 2:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="13.0" layoutY="501.0" text="Планшет 3:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Button disable="true" layoutX="288.0" layoutY="427.0" mnemonicParsing="false" text="на склад" />
+      <Button disable="true" layoutX="359.0" layoutY="427.0" mnemonicParsing="false" text="в пропавшие" />
+      <Button disable="true" layoutX="359.0" layoutY="466.0" mnemonicParsing="false" text="в пропавшие" />
+      <Button disable="true" layoutX="288.0" layoutY="466.0" mnemonicParsing="false" text="на склад" />
+      <Button disable="true" layoutX="359.0" layoutY="501.0" mnemonicParsing="false" text="в пропавшие" />
+      <Button disable="true" layoutX="288.0" layoutY="501.0" mnemonicParsing="false" text="на склад" />
+      <Separator layoutX="129.0" layoutY="550.0" prefWidth="200.0" />
+      <TextArea layoutX="13.0" layoutY="561.0" prefHeight="88.0" prefWidth="447.0" wrapText="true" />
+      <Separator layoutX="14.0" layoutY="658.0" prefHeight="3.0" prefWidth="447.0" />
+      <Button disable="true" layoutX="304.0" layoutY="667.0" mnemonicParsing="false" text="Внести изменения в базу" />
+   </children>
+</AnchorPane>

@@ -114,6 +114,9 @@ public class BusMainViewController implements Initializable {
     @FXML
     Button buttonAddPhotoHistory;
 
+    @FXML
+    TextArea textVNotes;
+
 
     public static Bus getSelectedBus() {
         return selectedBus;
@@ -191,7 +194,7 @@ public class BusMainViewController implements Initializable {
     }
 
     //Выводит лог в поле logField по выбранному автобусу
-    
+
     public void showLogOfSelectedBusInTableView() throws IOException, SQLException {
         selectedBus = busTable.getFocusModel().getFocusedItem();
         int id = selectedBus.getID();
@@ -199,6 +202,7 @@ public class BusMainViewController implements Initializable {
 
         Bus temp = Hiberbus.getBus(id);
 
+        System.out.println("Это temp.getHistory ========" + temp.getHistory());
 
         if (temp.getHistory().size() == 0) {
             System.out.println("Лог пустой");
@@ -220,11 +224,12 @@ public class BusMainViewController implements Initializable {
         labPark.setText(temp.getPark());
         labAddToBase.setText(temp.getAddDate().toString());
         imageV.setImage(Hiberbus.readPhotoFromDbase(id));
+        textVNotes.setText(Hiberbus.getSpesialMArks(temp.getNumber()));
 
         if (temp.getNumTabOnFrontWindow()) {
-            labRoutTab.setText("On Top");
+            labRoutTab.setText("На лобовом");
         } else {
-            labRoutTab.setText("On bottom");
+            labRoutTab.setText("Свободно");
         }
         String infoAboutPlanshets = "\"№:";
         System.out.println("SizeOF PlanshetList === " + temp.getPlanshetList().size());

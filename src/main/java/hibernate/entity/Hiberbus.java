@@ -101,6 +101,8 @@ public class Hiberbus {
         Hphotoset photoset = new Hphotoset();
         photoset.setBus(bus);
         photoset.setDateOfPhotoset(dateOfPhotoset);
+        History history = new History(new Date(), "+++Добавлен фотосет, датированный " + dateOfPhotoset, bus);
+        session.save(history);
         session.save(photoset);
         transaction.commit();
 
@@ -117,7 +119,7 @@ public class Hiberbus {
             blob.free();
 
         }
-//        transaction.commit();
+        //session.close();
 
         System.out.println(bus.getPhotosets().size());
     }
@@ -336,7 +338,7 @@ public class Hiberbus {
             }
 
         }
-    session.close();
+        session.close();
         return hiberBusList;
 
     }
@@ -370,14 +372,14 @@ public class Hiberbus {
 
     //TODO Выводит фотосет по ID
 
-    public static List<Hphoto> getPhotosetById (int id) {
+    public static List<Hphoto> getPhotosetById(int id) {
         System.out.println("----------------------------------- ++++ Стартанул метод HiberBus getPhotosetById (id)");
         Session session = getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         Hphotoset temp = session.get(Hphotoset.class, id);
         List<Hphoto> listOfPhotosFromPhotoset = temp.getListofPhotos();
         transaction.commit();
-      //  session.close();
+        //  session.close();
 
         return listOfPhotosFromPhotoset;
     }
@@ -439,7 +441,17 @@ public class Hiberbus {
 
     }
 
+//TODO Прочитать все специальные заметки по автобусу
 
+    public static String getSpesialMArks(String number) {
+        String string = "";
+
+        HBus temp = getBus(number);
+
+        string = temp.getSpecialMarks().getLog();
+
+        return string;
+    }
 
 
 }

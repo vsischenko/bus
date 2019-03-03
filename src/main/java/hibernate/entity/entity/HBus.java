@@ -1,14 +1,20 @@
 package hibernate.entity.entity;
 
+import org.hibernate.Session;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
+
+import static hibernate.entity.Hiberbus.getSessionFactory;
 
 @Entity
 @Table(name = "bus")
@@ -20,7 +26,7 @@ public class HBus {
     @Column
     private int route;
     @NaturalId
-    @Column (name="number")
+    @Column(name = "number")
     private String number;
     @Column
     private String model;
@@ -28,23 +34,24 @@ public class HBus {
     @Embedded
     private SpecialMarks specialMarks;
 
-    @OneToMany(fetch=FetchType.LAZY, mappedBy="bus")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "bus")
     private List<Contact> contacts;
 
     @Column
-    @OneToMany (fetch=FetchType.EAGER, mappedBy = "bus")
-    private List<Hplanshet> planshets= new ArrayList<>();
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "bus")
+    private List<Hplanshet> planshets = new ArrayList<>();
 
     @Column
     private Date addDate;
     @Column
     private Date seenDate = getAddDate();
+
     @Column
-    @OneToMany (fetch=FetchType.LAZY, mappedBy = "bus")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "bus")
     private List<History> history;
 
     @Column
-    @OneToMany (fetch=FetchType.LAZY, mappedBy = "bus")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "bus")
     private List<Hphotoset> photosets = new ArrayList<Hphotoset>();
 
 
@@ -139,8 +146,19 @@ public class HBus {
     public void setSeenDate(Date seenDate) {
         this.seenDate = seenDate;
     }
+
     @Transactional
     public List<History> getHistory() {
+        Session session = getSessionFactory().openSession();
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+        CriteriaQuery<History> historyCriteriaQuery = cb.createQuery(History.class);
+        Root<History> historyRoot = historyCriteriaQuery.from(History.class);
+        historyCriteriaQuery.select(historyRoot);
+        Predicate predicate = cb.equal(historyRoot.get("bus"), this.getID());
+        historyCriteriaQuery.where(predicate);
+        Query query = session.createQuery(historyCriteriaQuery);
+        List<History> history = query.getResultList();
+        session.close();
         return history;
     }
 
@@ -172,7 +190,7 @@ public class HBus {
         this.park = park;
     }
 
-    public void setContactToContactList (Contact cont) {
+    public void setContactToContactList(Contact cont) {
         getContacts().add(cont);
     }
 
@@ -199,10 +217,10 @@ public class HBus {
                 ", route=" + route +
                 ", number='" + number + '\'' +
                 ", model='" + model + '\'' +
-              //  ", contacts=" + contacts +
+                //  ", contacts=" + contacts +
                 ", addDate=" + addDate +
                 ", seenDate=" + seenDate +
-               // ", history=" + history +
+                // ", history=" + history +
                 ", inArch=" + inArch +
                 ", numTabOnFrontWindow=" + numTabOnFrontWindow +
                 ", park='" + park + '\'' +
