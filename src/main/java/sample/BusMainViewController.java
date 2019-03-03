@@ -137,8 +137,7 @@ public class BusMainViewController implements Initializable {
 
         try {
             Hiberbus.firstStart();
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             System.out.println("КАпец, нет файла. Поймано в стартовом методе");
         }
 
@@ -268,51 +267,32 @@ public class BusMainViewController implements Initializable {
 
     //Вызов окна Добавления планшета на автобус
     public void displayAddPlWindow(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/planshetAddToBusPopupWindow.fxml"));
-
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setTitle("Установка планшета на автобус");
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setScene(scene);
-        stage.show();
-
-        stage.setOnCloseRequest(e -> refreshTableView()); // это когда закрываем по крестику
-        stage.setOnHidden(e -> refreshTableView());    //это когда закрываем по кнопке ... потому что это "по кнопке" не считается закрытием страницы
+        openWindow(actionEvent, "/fxml/planshetAddToBusPopupWindow.fxml", "Установка планшета на автобус");
     }
 
     //Вызов окна добавления автобуса в базу
     public void addBusToDatabase(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/busAddToDatabasePopupWindow.fxml"));
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setTitle("Добавление автобуса");
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setScene(scene);
-        stage.show();
-        stage.setOnCloseRequest(e -> refreshTableView());
-        stage.setOnHidden(e -> refreshTableView());
+        openWindow(actionEvent, "/fxml/busAddToDatabasePopupWindow.fxml", "Добавление автобуса");
     }
 
-    public void testPhotoSetup(ActionEvent actionEvent) throws IOException, SQLException {
-
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/addPhotosetToBus.fxml"));
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setTitle("Добавление фоточек");
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setScene(scene);
-        stage.show();
-        stage.setOnCloseRequest(e -> refreshTableView());
-        stage.setOnHidden(e -> refreshTableView());
-
+    public void testPhotoSetup(ActionEvent actionEvent) throws IOException {
+        openWindow(actionEvent, "/fxml/addPhotosetToBus.fxml", "Добавить фотосет");
     }
 
     public void oepnPhotoHistoryWindow(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/photosetsView.fxml"));
+        openWindow(actionEvent, "/fxml/photosetsView.fxml", "Фотоистория");
+    }
+
+    public void openEditBusWindow(ActionEvent actionEvent) throws IOException {
+        openWindow(actionEvent, "/fxml/editBus.fxml", "EditBus");
+    }
+
+
+    public void openWindow(ActionEvent event, String routToFxmlFile, String title) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource(routToFxmlFile));
         Scene scene = new Scene(root);
         Stage stage = new Stage();
-        stage.setTitle("Photohistory");
+        stage.setTitle(title);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
         stage.show();

@@ -173,7 +173,7 @@ public class Hiberbus {
         Blob blob = bus.getPhoto();
         if (blob == null) {
             System.out.println("Нет фоточки");
-            File file = new File("C:/00/1/00003.jpg");
+            File file = new File("C:/00/1/00003.jpg");  //что ли тоже из базы брать?
             FileInputStream inputStream = new FileInputStream(file);
             Image im = new Image(inputStream);
             return im;
@@ -379,7 +379,7 @@ public class Hiberbus {
         Hphotoset temp = session.get(Hphotoset.class, id);
         List<Hphoto> listOfPhotosFromPhotoset = temp.getListofPhotos();
         transaction.commit();
-        //  session.close();
+        session.close();
 
         return listOfPhotosFromPhotoset;
     }

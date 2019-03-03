@@ -1,5 +1,6 @@
 package sample;
 
+import hibernate.entity.Hiberbus;
 import hibernate.entity.entity.History;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -35,6 +36,8 @@ public class Bus {
 
     private final SimpleStringProperty busColor;
 
+    private final SimpleStringProperty notes;
+
     private List<Planshet> planshetList = new ArrayList<>();
 
     public List<Planshet> getPlanshetList() {
@@ -62,7 +65,7 @@ public class Bus {
         this.numTabOnFrontWindow = false;
         this.park = null;
         this.busColor = null;
-
+        this.notes = null;
     }
 
     public Bus(Integer id, String route, String number, String model, Date addDate, Date seenDate, boolean numTabOnFrontWindow, String park, String busColor) {
@@ -76,6 +79,7 @@ public class Bus {
         this.park = new SimpleStringProperty(park);
         this.busColor = new SimpleStringProperty(busColor);
         this.plNum = new SimpleStringProperty("NO");
+        this.notes = new SimpleStringProperty(Hiberbus.getSpesialMArks(number));
     }
 
     public int getID() {
@@ -102,6 +106,10 @@ public class Bus {
 
     public Date getSeenDate() {
         return seenDate.get();
+    }
+
+    public String getNotes() {
+        return notes.get();
     }
 
 

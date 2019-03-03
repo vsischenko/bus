@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding" addBOMForNewFiles="with BOM under Windows, with no BOM otherwise">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/hibernate/entity/Hiberbus.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/sample/AddPlWindow.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/sample/Bus.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/sample/BusMainViewController.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/sample/EditBusController.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/sample/Main.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/sample/Planshet.java" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />

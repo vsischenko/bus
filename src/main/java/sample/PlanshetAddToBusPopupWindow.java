@@ -49,9 +49,7 @@ public class PlanshetAddToBusPopupWindow implements Initializable {
     private Label labelStatusOfPlanshet;
 
 
-    public ObservableList<Planshet> list = FXCollections.observableArrayList(
-
-    );
+    public ObservableList<Planshet> list = FXCollections.observableArrayList();
     @FXML
     private Button closeButton;
 

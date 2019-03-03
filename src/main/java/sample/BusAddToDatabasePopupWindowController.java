@@ -90,7 +90,6 @@ public class BusAddToDatabasePopupWindowController implements Initializable {
         comboNumTableOnFrontWindow.getItems().setAll("На лобовом", "Лобовое свободно");
         comboPark.getItems().setAll("Вираж");
 
-
     }
 
 

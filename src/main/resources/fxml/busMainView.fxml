@@ -189,7 +189,7 @@
                   <HBox prefHeight="36.0" prefWidth="495.0" spacing="5.0">
                      <children>
                         <Button fx:id="buttonAddBus" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#addBusToDatabase" text="Добавить" />
-                        <Button fx:id="editBusButton" mnemonicParsing="false" text="Редактировать" visible="false" />
+                        <Button fx:id="editBusButton" mnemonicParsing="false" onAction="#openEditBusWindow" text="Редактировать" visible="false" />
                         <Button fx:id="addPlanshetButton" mnemonicParsing="false" onAction="#displayAddPlWindow" text="Добавить планшет" visible="false" />
                         <Button fx:id="buttonAddPhotoHistory" mnemonicParsing="false" onAction="#testPhotoSetup" text="Добавить фото" visible="false" />
                      </children>
