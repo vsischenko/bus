@@ -10,6 +10,7 @@
        <property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
      <property name="hibernate.connection.CharSet">utf8</property>
      <property name="hibernate.connection.characterEncoding">utf8</property>
+        <property name="connection.pool_size">100</property>
 
 
        <property name="connection.username">root</property>
@@ -33,6 +34,7 @@
         <mapping class = "hibernate.entity.entity.SpecialMarks"></mapping>
         <mapping class = "hibernate.entity.entity.Hphotoset"></mapping>
         <mapping class = "hibernate.entity.entity.Hphoto"></mapping>
+        <mapping class = "hibernate.entity.entity.Pics"></mapping>
 
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hbm2ddl.auto">update</property> -->

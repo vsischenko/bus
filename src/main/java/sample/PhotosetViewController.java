@@ -18,6 +18,7 @@ import javafx.scene.input.MouseEvent;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.Date;
@@ -25,7 +26,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 
-public class photosetViewController implements Initializable {
+public class PhotosetViewController implements Initializable {
 
     public Photoset selectedPhotoset;
 
@@ -73,12 +74,12 @@ public class photosetViewController implements Initializable {
         tableViewTableOfPhotosets.setItems(list);
     }
 
-    public void showPhotoset(MouseEvent mouseEvent) throws SQLException, FileNotFoundException {
+    public void showPhotoset(MouseEvent mouseEvent) throws SQLException, IOException {
         selectedPhotoset = tableViewTableOfPhotosets.getFocusModel().getFocusedItem();
         int id = selectedPhotoset.getId();
         List<Hphoto> list = Hiberbus.getPhotosetById(id);
 
-        Image background = new Image(new FileInputStream("src\\main\\java\\sample\\pics\\background.png"));
+        Image background = Hiberbus.readPhotoFromPics(1);
         imView01.setImage(background);
         imView02.setImage(background);
         imView03.setImage(background);

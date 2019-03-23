@@ -68,16 +68,19 @@ public class BusPlanshViewController implements Initializable {
         plType.setCellValueFactory(new PropertyValueFactory<Planshet, String>("typeOfPlanshet"));
         state.setCellValueFactory(new PropertyValueFactory<Planshet, String>("state"));
         position.setCellValueFactory(new PropertyValueFactory<Planshet, String>("bus_gosnumber"));
-        mountDate.setCellValueFactory(new PropertyValueFactory<Planshet,Date>("mountDate"));
+        mountDate.setCellValueFactory(new PropertyValueFactory<Planshet, Date>("mountDate"));
         // list.add(new Planshet("001","Алюм","ok"));
         list.add(Hiberbus.getPlanshet(1));
-     //   list.add(Hiberbus.getPlanshet(2));
+        list.add(Hiberbus.getPlanshet(2));
+        list.add(Hiberbus.getPlanshet(3));
+        list.add(Hiberbus.getPlanshet(4));
+
 
 
         planshetTable.setItems(list);
-       // Hiberbus.replacePlanshet("001", "0000");
-      //  Hiberbus.replacePlanshet("002","0000");
-     //   planshetTable.setItems(list);
+        // Hiberbus.replacePlanshet("001", "0000");
+        //  Hiberbus.replacePlanshet("002","0000");
+        //   planshetTable.setItems(list);
     }
 
     //TODO Переключение View на Базу Автобусов

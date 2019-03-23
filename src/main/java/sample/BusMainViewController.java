@@ -4,6 +4,7 @@ import com.sun.javafx.charts.Legend;
 
 import hibernate.entity.Hiberbus;
 import hibernate.entity.entity.HBus;
+import hibernate.entity.entity.Pics;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -49,6 +50,9 @@ public class BusMainViewController implements Initializable {
 
     private static Bus selectedBus;
 
+
+
+
     @FXML
     private TableView<Bus> busTable;
 
@@ -85,6 +89,8 @@ public class BusMainViewController implements Initializable {
     @FXML
     private BorderPane borderPane;
 
+    @FXML
+    private Label labTopCount;
 
     @FXML
     Label labGosnum;
@@ -128,6 +134,7 @@ public class BusMainViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         seenDate.setCellValueFactory(new PropertyValueFactory<Bus, Date>("seenDate"));
         gosNum.setCellValueFactory(new PropertyValueFactory<Bus, String>("number"));
         routeNum.setCellValueFactory(new PropertyValueFactory<Bus, Integer>("route"));
@@ -143,10 +150,17 @@ public class BusMainViewController implements Initializable {
 
 //Вызываем метод, который считывает все данные из Таблицы Bus и загружает их в TableView
         list.addAll(entityBusToBusConverter.parsListOfEntityBus(Hiberbus.getAllInBusTable()));
+        BusAmountOnRouteCondition.counter(list);
+        labelTopUpdate();
         busTable.setItems(list);
         searchBus(); //активирует поиск автобуса по номеру в таблице
 
     }
+
+    public void labelTopUpdate () {
+        labTopCount.setText("ВСЕГО АВТОБУСОВ В БАЗЕ:" + " 146 - "+ BusAmountOnRouteCondition.bus146 + " | " + " 121 - "+ BusAmountOnRouteCondition.bus121);
+    }
+
 
     public void refreshTableView() {
         list.clear();
@@ -256,9 +270,14 @@ public class BusMainViewController implements Initializable {
         Parent home_page_parent = FXMLLoader.load(getClass().getResource("/fxml/busPlanshView.fxml"));
 //видимо, получаю текущую главную сцену
         Stage stageTheEventSourceNodeBelongs = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-
         stageTheEventSourceNodeBelongs.setScene(new Scene(home_page_parent));
+    }
 
+    // Переключение сцены внутри окна. Запись fxml: "/fxml/busPlanshView.fxml"
+    public void changeSceen (ActionEvent e, String fxml) throws IOException {
+        Parent home_page_parent = FXMLLoader.load(getClass().getResource(fxml));
+        Stage stageTheEventSourceNodeBelongs = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        stageTheEventSourceNodeBelongs.setScene(new Scene(home_page_parent));
     }
 
     public void setSceenMainBus(ActionEvent actionEvent) {
@@ -296,8 +315,10 @@ public class BusMainViewController implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
         stage.show();
+        labelTopUpdate();
         stage.setOnCloseRequest(e -> refreshTableView());
         stage.setOnHidden(e -> refreshTableView());
+
     }
 
 //Строка для поиска в таблице

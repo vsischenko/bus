@@ -74,7 +74,9 @@ public class PlanshetAddToBusPopupWindow implements Initializable {
         state.setCellValueFactory(new PropertyValueFactory<Planshet, String>("state"));
         bus.setCellValueFactory(new PropertyValueFactory<Planshet, String>("bus_gosnumber"));
         list.add(Hiberbus.getPlanshet(1));
-       // list.add(Hiberbus.getPlanshet(4));
+        list.add(Hiberbus.getPlanshet(2));
+        list.add(Hiberbus.getPlanshet(3));
+        list.add(Hiberbus.getPlanshet(4));
 
         labelSelectedBus.setText("Установить планшет на: госномер : " + selectedBusGosnumber);
         labelSelectedBusMountedPlanshetCount.setText("Сейчас на автобусе установлено: " + Integer.toString(numberOfMountedPlanshet));

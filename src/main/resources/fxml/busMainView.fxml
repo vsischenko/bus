@@ -208,7 +208,7 @@
    <center>
       <VBox alignment="TOP_CENTER" prefHeight="360.0" prefWidth="227.0" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" text="БАЗА АВТОБУСОВ" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS" />
+            <Label fx:id="labTopCount" alignment="CENTER_RIGHT" contentDisplay="CENTER" text="БАЗА АВТОБУСОВ" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS" />
             <TableView fx:id="busTable" onMouseClicked="#showLogOfSelectedBusInTableView" prefWidth="200.0" VBox.vgrow="ALWAYS">
               <columns>
                 <TableColumn fx:id="seenDate" prefWidth="75.0" text="Видели" />

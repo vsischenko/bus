@@ -42,8 +42,10 @@ public class Hiberbus {
     //TODO стартовый скрипт. Создание и заполнение базы.
     //нужен когда база пустая. когда новую прогу разворачиваю с новой базой. Автобус номером 0000 я считаю складом.
     public static void firstStart() throws FileNotFoundException {
-        String[] arrayOfParam = {"0000", "Склад", "000", "r", "На лобовом", "Сарай", "Склад определн"};
+        String[] arrayOfParam = {"0000", "Склад", "000", "r", "На лобовом", "Сарай", "Склад определён"};
         ArrayList<String> arr = new ArrayList<String>();
+
+
 
         for (String i :
                 arrayOfParam) {
@@ -172,10 +174,8 @@ public class Hiberbus {
         HBus bus = (HBus) session.get(HBus.class, id);
         Blob blob = bus.getPhoto();
         if (blob == null) {
-            System.out.println("Нет фоточки");
-            File file = new File("C:/00/1/00003.jpg");  //что ли тоже из базы брать?
-            FileInputStream inputStream = new FileInputStream(file);
-            Image im = new Image(inputStream);
+            System.out.println("========================================================Нет фоточки");
+            Image im = readPhotoFromPics(1); //читаем пустой бэкграунд из базы
             return im;
         } else {
             byte[] blobBytes = blob.getBytes(1, (int) blob.length());
@@ -187,6 +187,20 @@ public class Hiberbus {
         }
 
     }
+
+
+    //TODO Прочитать фоточку из Pics из базы
+    public static Image readPhotoFromPics(int id) throws SQLException, IOException {
+        Session session = getSessionFactory().openSession();
+        Pics pic = (Pics) session.get(Pics.class, id);
+        Blob blob = pic.getPicture();
+        byte[] blobBytes = blob.getBytes(1, (int) blob.length());
+        Image im = new Image(blob.getBinaryStream());
+        blob.free();
+        session.close();
+        return im;
+    }
+
 
     private static void saveBytesToFile(String filePath, byte[] fileBytes) throws IOException {
         FileOutputStream outputStream = new FileOutputStream(filePath);
@@ -379,7 +393,7 @@ public class Hiberbus {
         Hphotoset temp = session.get(Hphotoset.class, id);
         List<Hphoto> listOfPhotosFromPhotoset = temp.getListofPhotos();
         transaction.commit();
-        session.close();
+        // session.close();
 
         return listOfPhotosFromPhotoset;
     }

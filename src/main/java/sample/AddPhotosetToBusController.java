@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -68,13 +69,13 @@ public class AddPhotosetToBusController implements Initializable {
 
     public void handlerOnDragOver(DragEvent e) {
         if (e.getDragboard().hasFiles()) {
-            System.out.println(e.getDragboard().getUrl());
+
             e.acceptTransferModes(TransferMode.ANY);
         }
 
     }
 
-    public void handlerOnDargDrop(DragEvent e) throws IOException {
+    public void handlerOnDargDrop(DragEvent e) throws IOException, SQLException{
 
         //   FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/addPhotosetToBus.fxml"));
         //  Parent root = loader.load();
@@ -83,12 +84,17 @@ public class AddPhotosetToBusController implements Initializable {
 
 
         files = e.getDragboard().getFiles();
-        File back = new File("src\\main\\java\\sample\\pics\\background.png");
-        sizeOfFilesList = files.size();
-        for (int i = 0; i < 6; i++) {
-            files.add(back);
+        List <Image> imageList = new ArrayList<>();
+
+        for (int i =0; i<files.size(); i++) {
+            imageList.add(new Image(new FileInputStream(files.get(i))));
         }
 
+        Image back = Hiberbus.readPhotoFromPics(1);
+        sizeOfFilesList = imageList.size();
+        for (int i = sizeOfFilesList; i < 6; i++) {
+            imageList.add(back);
+        }
 
         imV01.setImage(new Image(new FileInputStream(files.get(0))));
         imV02.setImage(new Image(new FileInputStream(files.get(1))));
@@ -96,8 +102,6 @@ public class AddPhotosetToBusController implements Initializable {
         imV04.setImage(new Image(new FileInputStream(files.get(3))));
         imV05.setImage(new Image(new FileInputStream(files.get(4))));
         imV06.setImage(new Image(new FileInputStream(files.get(5))));
-
-
     }
 
     public void setImagesToImageView(String name, Image image) {
@@ -112,14 +116,20 @@ public class AddPhotosetToBusController implements Initializable {
 
         labBusNumber.setText("Добавляем фотосет к автобусу №  " + busNum);
 
-        setBackgroundPics();
+        try {
+            setBackgroundPics();
+        }
+        catch (Exception e) {
+            System.out.println("В добавлении фото к фотосету вылетел эксепшн, который связан с SQL");
+        }
+
 
 
     }
 
-    public void setBackgroundPics() {
-        try {
-            Image background = new Image(new FileInputStream("src\\main\\java\\sample\\pics\\background.png"));
+    public void setBackgroundPics() throws SQLException, IOException    {
+
+            Image background = Hiberbus.readPhotoFromPics(1);
             imV01.setImage(background);
             imV02.setImage(background);
             imV03.setImage(background);
@@ -127,13 +137,9 @@ public class AddPhotosetToBusController implements Initializable {
             imV05.setImage(background);
             imV06.setImage(background);
 
-
-        } catch (FileNotFoundException e) {
-            System.out.println("Не найден файл background");
-        }
     }
 
-    public void savePhotosetToDatabase(ActionEvent actionEvent) throws FileNotFoundException, InterruptedException, SQLException {
+    public void savePhotosetToDatabase(ActionEvent actionEvent) throws IOException, InterruptedException, SQLException {
         LocalDate dateOfPhotoset = datePicker.getValue();
         Hiberbus.createPhotoset(files, busNum, DateUtils.asDate(dateOfPhotoset), sizeOfFilesList);
         setBackgroundPics();

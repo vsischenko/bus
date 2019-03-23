@@ -56,7 +56,7 @@ public class Bus {
 
     public Bus(SimpleStringProperty plNum) {
         this.plNum = null;
-        ID = null;
+        this.ID = null;
         this.route = null;
         this.number = null;
         this.model = null;
@@ -69,7 +69,7 @@ public class Bus {
     }
 
     public Bus(Integer id, String route, String number, String model, Date addDate, Date seenDate, boolean numTabOnFrontWindow, String park, String busColor) {
-        ID = new SimpleIntegerProperty(id);
+        this.ID = new SimpleIntegerProperty(id);
         this.route = new SimpleStringProperty(route);
         this.number = new SimpleStringProperty(number);
         this.model = new SimpleStringProperty(model);
@@ -84,6 +84,10 @@ public class Bus {
 
     public int getID() {
         return ID.get();
+    }
+
+    public void setID(int ID) {
+        this.ID.set(ID);
     }
 
     public String getRoute() {

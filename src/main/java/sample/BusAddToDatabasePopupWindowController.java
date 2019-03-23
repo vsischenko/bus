@@ -84,10 +84,10 @@ public class BusAddToDatabasePopupWindowController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        menuButtonModelOfBus.getItems().setAll("Богдан 92", "Богдан 91", "Иван", "Эталон", "Рута");
-        comboRouteNumber.getItems().setAll("121", "146", "175", "185", "232","203");
-        comboColorOfBus.getItems().setAll("Желтый", "Белый", "Синий", "Фиолетовый", "Кобинированный");
-        comboNumTableOnFrontWindow.getItems().setAll("На лобовом", "Лобовое свободно");
+        menuButtonModelOfBus.getItems().setAll(TextConstant.getBusModelList());
+        comboRouteNumber.getItems().setAll(TextConstant.getBusRouteNumbers());
+        comboColorOfBus.getItems().setAll(TextConstant.getBusColor());
+        comboNumTableOnFrontWindow.getItems().setAll(TextConstant.getBusTableOnFrontWindow());
         comboPark.getItems().setAll("Вираж");
 
     }
@@ -177,7 +177,6 @@ public class BusAddToDatabasePopupWindowController implements Initializable {
         System.out.println(files.get(0).getPath());
         setFile(files.get(0));
         textAreaLog.setText("Фото: " + files.get(0).getPath());
-
     }
 
 
@@ -201,14 +200,11 @@ public class BusAddToDatabasePopupWindowController implements Initializable {
     public void closeWindow(ActionEvent actionEvent) {
 
         Stage stage = (Stage) buttonClose.getScene().getWindow();
-
-
         stage.close();
 
     }
 
     public void openFileChooserDialog(ActionEvent actionEvent) {
-
         Stage stage = (Stage) buttonClose.getScene().getWindow();
         final FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(stage);
