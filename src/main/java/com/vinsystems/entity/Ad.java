@@ -1,8 +1,8 @@
-package com.vinsystems.dto;
+package com.vinsystems.entity;
 
 import java.time.LocalDateTime;
 
-public interface AdvertisementDTO extends Viewable, CommonActionsDTO {
+public interface Ad extends Viewable {
 
     //Broken, Active, in Store, Deleted, etc.
     String getStatus();

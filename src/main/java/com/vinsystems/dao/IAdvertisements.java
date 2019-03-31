@@ -1,42 +1,42 @@
 package com.vinsystems.dao;
 
-import com.vinsystems.dto.AdvertisingHostDTO;
-import com.vinsystems.dto.AdvertisementDTO;
-import com.vinsystems.dto.CustomerDTO;
+import com.vinsystems.entity.Ad;
+import com.vinsystems.entity.AdvertisingHost;
+import com.vinsystems.entity.Customer;
 
 import java.util.List;
 
 /**
- * Interface for AdvertisementDTO service
+ * Interface for Ad service
  */
 public interface IAdvertisements {
 
     /**
      * returns all Advertisements available in the system
      *
-     * @return {@link List}<{@link AdvertisementDTO}>
+     * @return {@link List}<{@link Ad}>
      */
-    List<AdvertisementDTO> getAllAdvertisements();
+    List<Ad> getAllAdvertisements();
 
     /**
-     * returns all Advertisements available in the system for specific {@link AdvertisingHostDTO}
+     * returns all Advertisements available in the system for specific {@link AdvertisingHost}
      *
-     * @return {@link List}<{@link AdvertisementDTO}>
+     * @return {@link List}<{@link Ad}>
      */
-    List<AdvertisementDTO> getAllAdvertisements(AdvertisingHostDTO hub);
+    List<Ad> getAllAdvertisements(AdvertisingHost hub);
 
     /**
-     * returns all Advertisements available in the system for specific {@link CustomerDTO}
+     * returns all Advertisements available in the system for specific {@link Customer}
      *
-     * @return {@link List}<{@link AdvertisementDTO}>
+     * @return {@link List}<{@link Ad}>
      */
-    List<AdvertisementDTO> getAdvertisements(CustomerDTO customer);
+    List<Ad> getAdvertisements(Customer customer);
 
     /**
-     * returns all Advertisements of specific type {@link AdvertisementDTO} available in the system
+     * returns all Advertisements of specific type {@link Ad} available in the system
      *
-     * @return {@link List}<{@link AdvertisementDTO}>
+     * @return {@link List}<{@link Ad}>
      */
-    List<AdvertisementDTO> getAllAdvertisementsByType(Class<? extends AdvertisementDTO> advertisementTypeClass);
+    List<Ad> getAllAdvertisementsByType(Class<? extends Ad> advertisementTypeClass);
 
 }

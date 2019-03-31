@@ -9,14 +9,26 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!--    <link rel="icon" href="../../favicon.ico"/>-->
-    <title>Testing web app</title>
+    <title>Bus List</title>
     <!-- Bootstrap core CSS -->
     <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
 </head>
 <body>
 <div class="container">
-    <span>Get your greeting <a href="/greeting">here</a></span><br>
-    <span>Get all BusHosts <a href="/getAllBusHosts">here</a></span>
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th>Model</th>
+            <th>Car Park</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="bus:${busAdHostList}">
+            <td th:text="${bus.model}"/>
+            <td th:text="${bus.carPark}"/>
+        </tr>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>

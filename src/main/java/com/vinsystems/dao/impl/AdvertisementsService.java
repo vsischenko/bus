@@ -1,31 +1,31 @@
 package com.vinsystems.dao.impl;
 
 import com.vinsystems.dao.IAdvertisements;
-import com.vinsystems.dto.AdvertisementDTO;
-import com.vinsystems.dto.AdvertisingHostDTO;
-import com.vinsystems.dto.CustomerDTO;
+import com.vinsystems.entity.Ad;
+import com.vinsystems.entity.AdvertisingHost;
+import com.vinsystems.entity.Customer;
 
 import java.util.List;
 
 public class AdvertisementsService implements IAdvertisements {
 
     @Override
-    public List<AdvertisementDTO> getAllAdvertisements() {
+    public List<Ad> getAllAdvertisements() {
         return null;
     }
 
     @Override
-    public List<AdvertisementDTO> getAllAdvertisements(AdvertisingHostDTO hub) {
+    public List<Ad> getAllAdvertisements(AdvertisingHost hub) {
         return null;
     }
 
     @Override
-    public List<AdvertisementDTO> getAdvertisements(CustomerDTO customer) {
+    public List<Ad> getAdvertisements(Customer customer) {
         return null;
     }
 
     @Override
-    public List<AdvertisementDTO> getAllAdvertisementsByType(Class<? extends AdvertisementDTO> advertisementTypeClass) {
+    public List<Ad> getAllAdvertisementsByType(Class<? extends Ad> advertisementTypeClass) {
         return null;
     }
 }
