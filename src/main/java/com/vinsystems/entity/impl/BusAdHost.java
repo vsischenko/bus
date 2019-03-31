@@ -44,7 +44,6 @@ public class BusAdHost implements AdvertisingHost {
     @Column
     private LocalDateTime reviewDate;
 
-
     public Integer getId() {
         return id;
     }
