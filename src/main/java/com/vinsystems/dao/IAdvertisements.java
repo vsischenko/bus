@@ -18,6 +18,9 @@ public interface IAdvertisements {
      */
     List<Ad> getAllAdvertisements();
 
+    //temporary placement, will be moved to adHost service interface
+    <T extends AdvertisingHost> List<T> getAllAdHosts(Class<T> hub);
+
     /**
      * returns all Advertisements available in the system for specific {@link AdvertisingHost}
      *

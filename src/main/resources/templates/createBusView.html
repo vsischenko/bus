@@ -9,27 +9,17 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!--    <link rel="icon" href="../../favicon.ico"/>-->
-    <title>Bus List</title>
+    <title>Create Bus</title>
     <!-- Bootstrap core CSS -->
     <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
 </head>
 <body>
 <div class="container">
-    <table class="table">
-        <thead class="thead-dark">
-        <tr>
-            <th>Model</th>
-            <th>Car Park</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="bus:${busAdHostList}">
-            <td th:text="${bus.model}"/>
-            <td th:text="${bus.carPark}"/>
-        </tr>
-        </tbody>
-    </table>
-    <span><a href="/createBusView">Create Bus</a></span>
+    <form action="#" th:action="@{/createBus}" th:object="${busAdHost}" method="post">
+        <p>Model: <input type="text" th:field="*{model}"/></p>
+        <p>Car Park: <input type="text" th:field="*{carPark}"/></p>
+        <p><input type="submit" value="Submit"/></p>
+    </form>
 </div>
 </body>
 </html>
